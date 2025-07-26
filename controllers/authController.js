@@ -1,10 +1,9 @@
 const asyncHandler = require('express-async-handler');
 const user = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-// this is git hub test
 
 const createToken = (payload) => {
-    jwt.sign({userId: payload}, "htasjojdsecretkdom@!sk", { expiresIn: "7d" })
+    jwt.sign({userId: payload}, process.env.JWT_SECRET, { expiresIn: "7d" })
 };
 
 exports.signUp = asyncHandler(async (req, res) => {
@@ -30,7 +29,7 @@ exports.protected = asyncHandler(async (req, res, next) => {
         return;
     }
     try {
-        const decoded = jwt.verify(token, "secretKey");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = await user.findById(decoded.userId);
         next();
     } catch (error) {
