@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const user = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+// this is git hub test
 
 const createToken = (payload) => {
     jwt.sign({userId: payload}, "htasjojdsecretkdom@!sk", { expiresIn: "7d" })
