@@ -21,7 +21,7 @@ exports.logIn = asyncHandler(async (req, res) => {
     delete user.password;
     res.status(200).json({data: user, token});
 });
-
+//hello 
 exports.protected = asyncHandler(async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {

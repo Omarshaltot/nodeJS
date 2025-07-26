@@ -26,7 +26,7 @@ const createUser = [
       }
       return true;
     }),
-
+//hello 
   check("password")
     .notEmpty()
     .withMessage("Enter password")

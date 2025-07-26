@@ -8,12 +8,14 @@ const {
   getAllProducts,
 } = require("../controllers/productController");
 
-const Route = express.Router();
+const { protected } = require("../controllers/authController");
 
-Route.post("/", createProduct);
+const Route = express.Router();
+// use protected routes
+Route.post("/", protected, createProduct);
 Route.get("/", getAllProducts);
 Route.get("/:id", getProductById);
-Route.put("/:id", updateProduct);
-Route.delete("/:id", deleteProduct);
+Route.put("/:id", protected, updateProduct);
+Route.delete("/:id", protected, deleteProduct);
 
 module.exports = Route;
