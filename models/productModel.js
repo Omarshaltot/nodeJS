@@ -1,3 +1,5 @@
+// productModel.js
+
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
@@ -34,3 +36,5 @@ const productSchema = new mongoose.Schema(
 const Product = new mongoose.model("Product", productSchema);
 
 module.exports = Product;
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhhNjY4NjBjMDFiYjdjNTE3NDBmNDQiLCJpYXQiOjE3NTM5MDA2NzgsImV4cCI6MTc1NDc2NDY3OH0.P7cVpranl4MRXEuxUMyfb11Qjpo6gmL2i0wqwdrybsc

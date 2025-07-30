@@ -1,6 +1,9 @@
-const Product = require("../models/productModel");
+// productController.js
 
-exports.getAllProducts = async (req, res) => {
+const Product = require("../models/productModel");
+const asyncHandler = require("express-async-handler");
+exports.getAllProducts = asyncHandler(
+  async(req, res) => {
   try {
     const productList = await Product.find();
     // is use soft delete
@@ -19,10 +22,10 @@ exports.getAllProducts = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "fail", error: error.message });
   }
-};
+});
 
 // Create a product
-exports.createProduct = async (req, res) => {
+exports.createProduct =asyncHandler( async (req, res) => {
   try {
     const newProduct = await Product.create(req.body);
     res.status(201).json({
@@ -32,7 +35,7 @@ exports.createProduct = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "fail", error: error.message });
   }
-};
+});
 
 // Get product by ID
 exports.getProductById = async (req, res) => {

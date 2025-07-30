@@ -1,3 +1,5 @@
+// userModel.js
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -10,11 +12,20 @@ const userSchema = new mongoose.Schema({
 
     },
 
+    passwordChangedAt: {
+    type: Date,
+    },
 
     password: {
         type: String,
         required: [true, 'Password Needed'],
         minlength: [6, 'At least 6 characters'],
+    },
+
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user',
     },
 
     address: {

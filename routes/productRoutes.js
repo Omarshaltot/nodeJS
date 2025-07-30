@@ -1,3 +1,5 @@
+// productRoutes.js
+
 const express = require("express");
 
 const {
@@ -6,16 +8,17 @@ const {
   updateProduct,
   deleteProduct,
   getAllProducts,
-} = require("../controllers/productController");
+} = require("../controllers/productController"); 
 
-const { protected } = require("../controllers/authController");
+const {protect, permission} = require("../controllers/authController");
+// const { permission } = require("process");
 
 const Route = express.Router();
 // use protected routes
-Route.post("/", protected, createProduct);
+Route.post("/", permission('admin'), protect, createProduct);
 Route.get("/", getAllProducts);
 Route.get("/:id", getProductById);
-Route.put("/:id", protected, updateProduct);
-Route.delete("/:id", protected, deleteProduct);
+Route.put("/:id", permission('admin'), protect, updateProduct);
+Route.delete("/:id", permission('admin'), protect, deleteProduct);
 
 module.exports = Route;

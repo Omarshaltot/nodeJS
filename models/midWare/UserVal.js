@@ -1,7 +1,9 @@
+// UserVal.js
+
 const { check, body } = require("express-validator");
 const slugify = require("slugify");
 const User = require("../../models/userModel");
-const validationM = require("./Valm");
+const validationM = require("./ValM");
 
 const createUser = [
   check("name")

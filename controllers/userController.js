@@ -1,23 +1,25 @@
+// userController.js
+
 const User = require("../models/userModel");
-exports.creatUser = async (req, res) => {
+// exports.creatUser = async (req, res) => {
 
-    try {
-        const newUser = await User.create({
+//     try {
+//         const newUser = await User.create({
 
-            name: req.body.name,
-            email: req.body.email,
-            address: req.body.address,
+//             name: req.body.name,
+//             email: req.body.email,
+//             address: req.body.address,
 
-        });
+//         });
 
-        res.status(201).json({ message: "Created", data: newUser })
+//         res.status(201).json({ message: "Created", data: newUser })
 
-    } catch (error) {
+//     } catch (error) {
 
-        res.status(500).json({ message: "fail" })
-    }
+//         res.status(500).json({ message: "fail" })
+//     }
 
-}
+// }
 
 exports.CreateUser = async (req, res) => {
     try {
