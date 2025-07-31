@@ -2,27 +2,58 @@
 
 const Product = require("../models/productModel");
 const asyncHandler = require("express-async-handler");
-exports.getAllProducts = asyncHandler(
-  async(req, res) => {
-  try {
-    const productList = await Product.find();
-    // is use soft delete
+
+exports.getAllProducts = asyncHandler(async (req, res) => {
+  Product.find()
+
+  const fil = new apiFilters(Product.find(), req.query).filter().page().sort()
+
+  const productList = await fil.query;
+})
+
+/*exports.getAllProducts = asyncHandler(async(req, res) => {
+  const queryObj = { ...req.query }
+  const f = ["sort", "page", "limit"];
+  f.forEach((el) => {
+    delete queryObj[el];
+  })
+  let query = Product.find(queryObj);
+  if(req.query.sort) {
+    const sortBy = req.query.sort
+    query = query.sort(sortBy)
+  }
+
+  if(req.query.fields) {
+    const selectBy = req.query.fields.split(",").join(" ");
+    query = query.select(selectBy);
+  }
+
+  const page = +req.query.page || 1;
+  const limit = +req.query.limit || 10;
+  const skip = (page - 1) * limit;
+  query = query.skip(skip).limit(limit);
+
+  // try {
+    // const productList = await Product.find();
+    // // is use soft delete
     // const features = new APIFeatures(
     //   Product.find({ isDeleted: false }),
     //   req.query
     
     // );
 
+  const productList = await query;
+
     res.status(200).json({
       message: "success",
       length: productList.length,
       data: productList,
     });
-  } catch (error) {
+  } /* catch (error) {
     console.error(error);
-    res.status(500).json({ message: "fail", error: error.message });
-  }
-});
+    res.status(500).json({ message: "fail", error: error.message }); */
+  // }
+/*});*/
 
 // Create a product
 exports.createProduct =asyncHandler( async (req, res) => {
