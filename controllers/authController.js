@@ -45,6 +45,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     }
 
     // Check user changed password after token was issued
+    req.user = currentUser;
     next();
 });
 
